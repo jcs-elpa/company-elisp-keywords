@@ -7,6 +7,13 @@
 
 [![CI](https://github.com/jcs-elpa/company-elisp-keywords/actions/workflows/test.yml/badge.svg)](https://github.com/jcs-elpa/company-elisp-keywords/actions/workflows/test.yml)
 
+## 💾 Quickstart
+
+```elisp
+(require 'company-elisp-keywords)
+(add-to-list 'company-backends 'company-elisp-keywords)
+```
+
 ## Contribute
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
