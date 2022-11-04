@@ -51,9 +51,17 @@
 (defvar company-elisp-keywords--candidates nil
   "Cache for candidates.")
 
+;;
+;; (@* "Util" )
+;;
+
 (defun company-elisp-keywords--2-str (object)
   "Convert OBJECT to string."
   (format "%s" object))
+
+;;
+;; (@* "Core" )
+;;
 
 (defun company-elisp-keywords--prepare ()
   "Prepare data."
