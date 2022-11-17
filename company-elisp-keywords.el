@@ -42,12 +42,6 @@
   :group 'tool
   :link '(url-link :tag "Repository" "https://github.com/jcs-elpa/company-elisp-keywords"))
 
-(defcustom company-elisp-keywords-active-modes
-  '( emacs-lisp-mode)
-  "List of active major-modes."
-  :type 'list
-  :group 'company-elisp-keywords-active-modes)
-
 (defvar company-elisp-keywords--candidates nil
   "Cache for candidates.")
 
@@ -73,7 +67,7 @@
 (defun company-elisp-keywords--doc-buffer (candidate)
   "Return document for CANDIDATE."
   (company-doc-buffer
-   (company-elisp-keywords--2-str (cdr (assq candidate finder-known-keywords)))))
+   (company-elisp-keywords--2-str (cdr (assq (intern candidate) finder-known-keywords)))))
 
 ;;;###autoload
 (defun company-elisp-keywords (command &optional arg &rest ignored)
@@ -84,7 +78,7 @@ Arguments COMMAND, ARG and IGNORED are standard arguments from `company-mode`."
   (company-elisp-keywords--prepare)
   (cl-case command
     (`interactive (company-begin-backend 'company-elisp-keywords))
-    (`prefix (and (memq major-mode company-elisp-keywords-active-modes)
+    (`prefix (and (derived-mode-p 'emacs-lisp-mode)
                   (string-match-p "^;[; ]+Keywords:" (thing-at-point 'line))
                   (company-grab-symbol)))
     (`candidates company-elisp-keywords--candidates)
