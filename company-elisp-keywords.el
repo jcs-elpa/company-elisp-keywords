@@ -6,7 +6,9 @@
 ;; Maintainer: Shen, Jen-Chieh <jcs090218@gmail.com>
 ;; URL: https://github.com/jcs-elpa/company-elisp-keywords
 ;; Version: 0.1.0
-;; Package-Requires: ((emacs "26.1") (company "0.8.0"))
+;; Package-Requires: ((emacs "26.1")
+;;                    (company "0.8.0")
+;;                    (elenv "0.1.0"))
 ;; Keywords: lisp
 
 ;; This file is not part of GNU Emacs.
@@ -35,6 +37,7 @@
 (require 'finder)
 
 (require 'company)
+(require 'elenv)
 
 (defgroup company-elisp-keywords nil
   "Company completion for `finder-known-keywords'."
@@ -46,14 +49,6 @@
   "Cache for candidates.")
 
 ;;
-;; (@* "Util" )
-;;
-
-(defun company-elisp-keywords--2-str (object)
-  "Convert OBJECT to string."
-  (format "%s" object))
-
-;;
 ;; (@* "Core" )
 ;;
 
@@ -61,13 +56,13 @@
   "Prepare data."
   (unless company-elisp-keywords--candidates
     (setq company-elisp-keywords--candidates (mapcar (lambda (keyword)
-                                                       (company-elisp-keywords--2-str (car keyword)))
+                                                       (elenv-2str (car keyword)))
                                                      finder-known-keywords))))
 
 (defun company-elisp-keywords--doc-buffer (candidate)
   "Return document for CANDIDATE."
   (company-doc-buffer
-   (company-elisp-keywords--2-str (cdr (assq (intern candidate) finder-known-keywords)))))
+   (elenv-2str (cdr (assq (intern candidate) finder-known-keywords)))))
 
 ;;;###autoload
 (defun company-elisp-keywords (command &optional arg &rest ignored)
